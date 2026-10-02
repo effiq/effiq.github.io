@@ -33,7 +33,7 @@ body{
 a{color:inherit;text-decoration:none}
 
 /* line-height trim */
-h1,h2,h3,p{--trim:0.5lh}
+h1,h2,h3,p{--trim:calc(.5lh - .5em)}
 h1::before,h2::before,h3::before,p::before{
   content:"";display:table;margin-bottom:calc(-1 * var(--trim));
 }
@@ -155,7 +155,7 @@ footer .githubline{margin-top:2.6rem;font-family:var(--mono);font-size:.78rem;le
 .footbar{margin-top:14vh;padding-top:2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
 
 /* reveal */
-.lm{display:block;overflow:clip}
+.lm{display:block;overflow:clip;padding-block:.1em;margin-block:-.1em}
 .rv .li{display:block;transform:translateY(110%);transition:transform 1.1s var(--ease)}
 .rv.on .li{transform:translateY(0)}
 
@@ -251,7 +251,6 @@ footer .githubline{margin-top:2.6rem;font-family:var(--mono);font-size:.78rem;le
     <div class="repo-row rv2">
       <div><a class="name ul" href="https://github.com/effiq/protocol">github.com/effiq/protocol</a>
       <small>Methodology · published before any numbers</small></div>
-    </span></span><span class="lm"><span class="li">
       <p class="desc">Open templates for trustworthy inference benchmarks: pre-registration, decision rules, execution logs, one-day re-run checklists, and a deviation procedure. We published our method first and accepted the risk of being copied — because the discipline, not the secret, is the advantage.
       <span class="stat">License: Apache-2.0 · Status: maintained</span></p>
 </div>
@@ -259,7 +258,6 @@ footer .githubline{margin-top:2.6rem;font-family:var(--mono);font-size:.78rem;le
     <div class="repo-row rv2">
       <div><a class="name ul" href="https://github.com/effiq/practice">github.com/effiq/practice</a>
       <small>Run 001 · pre-registered, executed, reported</small></div>
-    </span></span><span class="lm"><span class="li">
       <p class="desc">A complete end-to-end run at toy scale: two weight artifacts of the same model compared on identical serving settings, six interleaved runs, bootstrap confidence interval, quality gate. The candidate's speedup was <b>not confirmed</b> under the locked rule — and we published that result anyway, along with an artifact-integrity deviation caught by hash verification before any data was collected.
       <span class="stat">Decision rule: <b class="fail">FAIL</b> — R = 0.909, 95% CI [0.629, 1.301], pass bar ≥ 1.20 · Quality gate: <b>PASS</b> (0 pp degradation)</span></p>
 </div>

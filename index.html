@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Effiq — AI inference efficiency, proven before it is claimed</title>
+<meta name="description" content="Effiq optimizes LLM inference and publishes the measurement discipline behind every number. Rules locked before data. Raw artifacts. Confidence-bound decisions.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b13;
+  --ink:#ffffff;
+  --dim:rgba(255,255,255,.60);
+  --faint:rgba(255,255,255,.38);
+  --line:rgba(255,255,255,.08);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.625,.05,0,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--ink);color:var(--bg)}
+:focus-visible{outline:2px solid rgba(255,255,255,.85);outline-offset:4px}
+a{color:inherit;text-decoration:none}
+
+/* line-height trim */
+h1,h2,h3,p{--trim:0.5lh}
+h1::before,h2::before,h3::before,p::before{
+  content:"";display:table;margin-bottom:calc(-1 * var(--trim));
+}
+h1::after,h2::after,h3::after,p::after{
+  content:"";display:table;margin-bottom:calc(-1 * var(--trim));
+}
+
+/* grain */
+.grain{
+  position:fixed;inset:0;z-index:50;pointer-events:none;
+  opacity:.20;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+
+/* grid overlay + traces */
+.gridlines{position:fixed;inset:0;z-index:0;pointer-events:none;display:flex;justify-content:space-between;padding:0 4vw}
+.gridlines i{position:relative;width:1px;height:100%;background:rgba(255,255,255,.045)}
+.gridlines i::after{
+  content:"";position:absolute;left:0;top:0;width:1px;height:14vh;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,.28),transparent);
+  opacity:0;animation:trace linear infinite;
+}
+.gridlines i:nth-child(1)::after{animation-duration:8s;animation-delay:0s}
+.gridlines i:nth-child(2)::after{animation-duration:10s;animation-delay:3s}
+.gridlines i:nth-child(3)::after{animation-duration:7s;animation-delay:6s}
+.gridlines i:nth-child(4)::after{animation-duration:11s;animation-delay:2s}
+.gridlines i:nth-child(5)::after{animation-duration:9s;animation-delay:8s}
+.gridlines i:nth-child(6)::after{animation-duration:12s;animation-delay:4s}
+.gridlines i:nth-child(7)::after{animation-duration:6.5s;animation-delay:10s}
+.gridlines i:nth-child(8)::after{animation-duration:10.5s;animation-delay:1.5s}
+.gridlines i:nth-child(9)::after{animation-duration:8.5s;animation-delay:7s}
+.gridlines i:nth-child(10)::after{animation-duration:9.5s;animation-delay:5s}
+@keyframes trace{
+  0%{transform:translateY(-20vh);opacity:0}
+  8%{opacity:.35}
+  85%{opacity:.35}
+  100%{transform:translateY(120vh);opacity:0}
+}
+
+.wrap{position:relative;z-index:1;max-width:1500px;margin:0 auto;padding:0 4vw}
+
+/* nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.6rem 4vw;
+  background:linear-gradient(to bottom,rgba(7,11,19,.92),rgba(7,11,19,0));
+}
+.logo{font-family:var(--mono);font-weight:600;font-size:1.05rem;letter-spacing:.14em}
+.logo em{font-style:normal;color:var(--faint)}
+.navlinks{display:flex;gap:2.2rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+
+/* underline link */
+.ul{position:relative;display:inline-block}
+.ul::before{
+  content:"";position:absolute;bottom:-.10em;left:0;width:100%;height:.0625em;
+  background:currentColor;transform:scaleX(0) rotate(.001deg);transform-origin:right;
+  transition:transform .5s var(--ease);
+}
+.ul:hover::before{transform:scaleX(1) rotate(.001deg);transform-origin:left}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:9vh;padding-top:9rem;container-type:inline-size}
+.hero .label{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:3.2rem;display:flex;gap:1.2rem;align-items:center}
+.hero .label::before{content:"";width:2.4rem;height:1px;background:var(--faint)}
+h1{
+  font-size:10cqw;font-weight:500;letter-spacing:-.03em;line-height:.98;
+  white-space:nowrap;margin-bottom:4.2rem;
+}
+h1::before,h1::after{content:none}
+h1 .thin{color:var(--faint)}
+.hero .sub{max-width:34em;font-size:1.06rem;line-height:1.75;color:var(--dim);margin-bottom:3rem}
+.hero .ctas{display:flex;gap:2.6rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase}
+.hero .ctas a{color:var(--ink)}
+.hero .ctas a span{color:var(--faint);margin-left:.5rem}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:1.1rem 0;position:relative;z-index:1}
+.marquee .track{display:flex;width:max-content;animation:mq 42s linear infinite;font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.marquee .track span{padding:0 1.6rem}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding:16vh 0}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:4.5rem;display:flex;gap:1.2rem;align-items:center}
+.kicker::before{content:"";width:2.4rem;height:1px;background:var(--faint)}
+h2{font-size:clamp(2.2rem,4.6vw,4.2rem);font-weight:500;letter-spacing:-.02em;line-height:1.04;max-width:16em}
+
+/* split two-col, asymmetric */
+.cols{display:grid;grid-template-columns:5fr 7fr;gap:6vw;margin-top:6rem}
+.cols .lead{font-size:1.28rem;line-height:1.7;color:var(--ink);font-weight:300}
+.cols .body{font-size:.98rem;line-height:1.85;color:var(--dim)}
+.cols .body p+p{margin-top:1.4em}
+.cols .body strong{color:var(--ink);font-weight:500}
+
+/* method steps — rules, not cards */
+.steps{margin-top:7rem;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:8rem 1fr 1.2fr;gap:4vw;padding:3.2rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.step .num{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;color:var(--faint)}
+.step h3{font-size:1.35rem;font-weight:500;letter-spacing:-.01em}
+.step p{font-size:.94rem;line-height:1.8;color:var(--dim)}
+
+/* evidence rows */
+.repo-row{display:grid;grid-template-columns:5fr 7fr;gap:6vw;padding:3.6rem 0;border-bottom:1px solid var(--line);align-items:start}
+.repo-row:first-of-type{border-top:1px solid var(--line);margin-top:6rem}
+.repo-row .name{font-family:var(--mono);font-size:1rem;letter-spacing:.04em}
+.repo-row small{display:block;margin-top:.9rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.repo-row .desc{font-size:.98rem;line-height:1.8;color:var(--dim)}
+.repo-row .desc .stat{font-family:var(--mono);font-size:.8rem;color:var(--ink);display:block;margin-top:1.3rem;letter-spacing:.03em}
+.repo-row .desc .stat b{font-weight:600}
+.repo-row .desc .stat .fail{color:var(--ink);background:rgba(255,255,255,.10);padding:.1em .5em;border-radius:2px}
+
+/* footer */
+footer{padding:18vh 0 4vh}
+footer .mail{font-size:clamp(1.8rem,4.2vw,3.6rem);font-weight:500;letter-spacing:-.02em;font-family:var(--mono)}
+footer .mail span{font-size:.5em;vertical-align:middle;margin-right:1.2rem;color:var(--faint)}
+footer .githubline{margin-top:2.6rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.footbar{margin-top:14vh;padding-top:2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+
+/* reveal */
+.lm{display:block;overflow:clip}
+.rv .li{display:block;transform:translateY(110%);transition:transform 1.1s var(--ease)}
+.rv.on .li{transform:translateY(0)}
+
+@media (max-width:900px){
+  .cols,.repo-row,.step{grid-template-columns:1fr;gap:1.6rem}
+  h1{white-space:normal;font-size:clamp(2.6rem,13vw,5rem)}
+  .navlinks{display:none}
+  section{padding:12vh 0}
+}
+@media (prefers-reduced-motion:reduce){
+  .gridlines i::after,.marquee .track{animation:none}
+  .rv .li,.rv2{transform:none;transition:none;opacity:1}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="gridlines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<nav>
+  <a class="logo" href="#top">EFFIQ<em>.</em></a>
+  <div class="navlinks">
+    <a class="ul" href="#method">Method</a>
+    <a class="ul" href="#evidence">Evidence</a>
+    <a class="ul" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="label">AI inference efficiency</div>
+  <h1>
+    <span class="lm"><span class="li">Faster inference,</span></span>
+    <span class="lm"><span class="li thin">proven before</span></span>
+    <span class="lm"><span class="li thin">it is claimed.</span></span>
+  </h1>
+  <p class="sub">Effiq is an AI compute-efficiency company. We optimize large-model inference —
+  and every performance statement we publish comes with the locked protocol and the raw
+  artifacts needed to re-run it, disagree with it, or verify it independently.</p>
+  <div class="ctas">
+    <a class="ul" href="https://github.com/effiq/protocol">Read the method<span>↗</span></a>
+    <a class="ul" href="https://github.com/effiq/practice">See a live run<span>↗</span></a>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Pre-registered</span><span>·</span><span>Re-runnable</span><span>·</span><span>Confidence bounds</span><span>·</span><span>Raw data</span><span>·</span><span>No after-the-fact rules</span><span>·</span><span>Artifact hashes verified</span><span>·</span>
+    <span>Pre-registered</span><span>·</span><span>Re-runnable</span><span>·</span><span>Confidence bounds</span><span>·</span><span>Raw data</span><span>·</span><span>No after-the-fact rules</span><span>·</span><span>Artifact hashes verified</span><span>·</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section id="method">
+    <div class="kicker">What we do</div>
+    <h2 class="rv"><span class="lm"><span class="li">Optimization is the product.</span></span>
+    <span class="lm"><span class="li">Measurement is the moat.</span></span></h2>
+    <div class="cols">
+      <p class="lead rv"><span class="lm"><span class="li">Anyone can report a speedup.</span></span>
+      <span class="lm"><span class="li">We ship the proof with it.</span></span></p>
+      <div class="body rv"><span class="lm"><span class="li">
+        <p>LLM inference economics are won or lost on details: quantization strategy, batching and scheduling, memory layout, kernel choice. We build and apply those optimizations where they measurably hold up — <strong>on your hardware, your workload, your serving stack.</strong></p>
+        <p>What makes an Effiq number different is not the number. It is that the comparison was <strong>locked in writing before the data existed</strong>, executed against that lock, and decided by a statistical rule that cannot be bargained with after the fact. When the evidence does not clear the bar, we publish that too.</p>
+      </span></span></div>
+    </div>
+
+    <div class="steps">
+      <div class="step rv2">
+        <div class="num">01</div>
+        <h3>Lock the rules first</h3>
+        <p>Hypothesis, hardware, workload, metric, decision threshold, and failure handling are committed in a public pre-registration before any measurement. Changing them later requires a dated, written deviation — and the change itself becomes part of the record.</p>
+</div>
+      <div class="step rv2">
+        <div class="num">02</div>
+        <h3>Execute and preserve</h3>
+        <p>Runs are interleaved, servers restarted between arms, and every raw artifact kept: per-request records, artifact hashes checked against publisher records, environment versions, and a timestamped execution log.</p>
+</div>
+      <div class="step rv2">
+        <div class="num">03</div>
+        <h3>Decide by the bound, not the vibe</h3>
+        <p>A claim passes only if the lower bound of the confidence interval on the speedup ratio clears the pre-registered threshold. Point estimates do not win arguments. The full methodology is public in the protocol repository.</p>
+</div>
+    </div>
+  </section>
+
+  <section id="evidence">
+    <div class="kicker">Public evidence</div>
+    <h2 class="rv"><span class="lm"><span class="li">Everything we claim in public,</span></span>
+    <span class="lm"><span class="li">you can re-run in private.</span></span></h2>
+
+    <div class="repo-row rv2">
+      <div><a class="name ul" href="https://github.com/effiq/protocol">github.com/effiq/protocol</a>
+      <small>Methodology · published before any numbers</small></div>
+    </span></span><span class="lm"><span class="li">
+      <p class="desc">Open templates for trustworthy inference benchmarks: pre-registration, decision rules, execution logs, one-day re-run checklists, and a deviation procedure. We published our method first and accepted the risk of being copied — because the discipline, not the secret, is the advantage.
+      <span class="stat">License: Apache-2.0 · Status: maintained</span></p>
+</div>
+
+    <div class="repo-row rv2">
+      <div><a class="name ul" href="https://github.com/effiq/practice">github.com/effiq/practice</a>
+      <small>Run 001 · pre-registered, executed, reported</small></div>
+    </span></span><span class="lm"><span class="li">
+      <p class="desc">A complete end-to-end run at toy scale: two weight artifacts of the same model compared on identical serving settings, six interleaved runs, bootstrap confidence interval, quality gate. The candidate's speedup was <b>not confirmed</b> under the locked rule — and we published that result anyway, along with an artifact-integrity deviation caught by hash verification before any data was collected.
+      <span class="stat">Decision rule: <b class="fail">FAIL</b> — R = 0.909, 95% CI [0.629, 1.301], pass bar ≥ 1.20 · Quality gate: <b>PASS</b> (0 pp degradation)</span></p>
+</div>
+  </section>
+
+  <footer id="contact">
+    <div class="kicker">Contact</div>
+    <a class="mail ul" href="mailto:hello@effiq.tech"><span>→</span>hello@effiq.tech</a>
+    <div class="githubline"><a class="ul" href="https://github.com/effiq">github.com/effiq</a></div>
+    <div class="footbar">
+      <span>© 2026 Effiq</span>
+      <span>Every claim re-runnable</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.rv,.rv2').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

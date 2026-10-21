@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nine Ways Inference Benchmarks Lie — Effiq</title>
+<meta name="description" content="A field guide to unreliable numbers — nine failure modes, the tell for each, and the discipline that catches it.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-head">
+<div class="wrap">
+<a class="brand" href="../index.html"><svg class="seal" width="34" height="34" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="hring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#hring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg><span><span class="brand-name">EFFIQ</span><span class="brand-sub">AUDITABLE INFERENCE OPTIMIZATION</span></span></a>
+<nav class="site-nav">
+<a href="../index.html">Ledger</a>
+<a href="https://github.com/effiq">GitHub</a>
+<a href="https://effiq.substack.com">Newsletter</a>
+</nav>
+</div>
+</header>
+<header class="art-head">
+<div class="wrap">
+<div class="crumbs"><a href="../index.html">LEDGER</a> / 05 / FIELD GUIDE</div>
+<div class="art-meta"><span class="no">05</span><span>FIELD GUIDE</span><span>OCTOBER 12, 2026</span></div>
+<h1>Nine Ways Inference Benchmarks Lie</h1>
+<div class="evidence">NINE FAILURE MODES · EACH WITH ITS TELL AND ITS ANTIDOTE · CHECKABLE AGAINST PUBLIC REPOS</div>
+</div>
+</header>
+<article class="art-body">
+<h3 id="a-field-guide-to-unreliable-numbers-and-the-discipline-that-catches-each-one">A field guide to unreliable numbers — and the discipline that catches each one</h3>
+<p><em>Effiq · October 2026</em></p>
+<hr />
+<p>Every week someone publishes a number: “2.4× faster inference,” “40% cheaper serving,” “beats GPT-4 on our suite.” Most of these numbers are produced by people who are not trying to deceive anyone. That is precisely the problem. Inference benchmarking is full of traps that catch honest engineers, and an incentive structure that rewards the ones who fall in — because the trap usually makes your result look better.</p>
+<p>We run pre-registered inference benchmarks for a living. Below are the nine failure modes we design against, in roughly the order they corrupt a result: from what you measure, to what you measure it on, to how you report it. Each one comes with its tell — the detail that should make a reader suspicious — and its antidote, which in every case is a piece of discipline, not a piece of cleverness.</p>
+<p>Everything we claim about our own process is backed by public repositories: a <a href="https://github.com/effiq/protocol">methodology</a>, a <a href="https://github.com/effiq/practice">complete run with a published failure</a>, and this essay’s claims are checkable against both.</p>
+<hr />
+<h2 id="the-cherry-picked-workload">1. The cherry-picked workload</h2>
+<p><strong>The lie:</strong> The benchmark measures the workload where the optimization wins.</p>
+<p>Speedups are workload-dependent at a deep level. A technique that accelerates long, repetitive generation may do nothing for short answers. Batch-friendly optimizations shine at high concurrency and vanish at batch size one. Prompt processing (prefill) and token generation (decode) have different compute profiles — a method that speeds up one can be neutral or negative on the other.</p>
+<p>Pick your workload after you know your optimization, and you will, without lying once, produce a number that does not generalize.</p>
+<p><strong>The tell:</strong> A single benchmark task, chosen by the party being measured. No sensitivity analysis (“results hold across prompt lengths from 500 to 8,000 tokens”). No statement of what the workload was designed to represent.</p>
+<p><strong>The antidote:</strong> Fix the workload <em>before</em> touching the candidate optimization, in writing. In our protocol, the workload is generated from a fixed seed and frozen alongside the hypothesis. If the workload turns out to be unrepresentative, that is a finding — you report it and design a new experiment, you do not silently swap tasks.</p>
+<hr />
+<h2 id="the-unverifiable-artifact">2. The unverifiable artifact</h2>
+<p><strong>The lie:</strong> “Q4 quantization of model X” — but the weights were never checked.</p>
+<p>Model artifacts travel. They get re-uploaded to mirrors, converted, re-quantized, cached by CDNs, and corrupted along the way — silently, because a corrupted GGUF file usually still <em>loads</em>; it just produces degraded output. We know this because it happened to us: every reachable mirror of a baseline artifact was serving the same corrupted file, byte for byte. The model still answered questions. It answered them <em>slightly wrong</em>, which is the worst kind of corruption — invisible unless you check.</p>
+<p>If you benchmark against a corrupt baseline, your candidate wins by default. If you benchmark a corrupt candidate, your conclusion inverts. Either way the number is fiction.</p>
+<p><strong>The tell:</strong> No SHA-256. No publisher reference. “Downloaded from a mirror.” A quality result that looks <em>suspiciously</em> degraded, shrugged off.</p>
+<p><strong>The antidote:</strong> Hash everything, at download time, against the publisher’s official record — before any data is collected. If the hash does not match, you stop. This is Step 0 of our re-run checklist, not a footnote. When we had to switch a baseline artifact for this exact reason, the switch was logged as a dated deviation <em>before</em> measurement, with the evidence attached. A benchmark you cannot verify at the artifact level is not a benchmark; it is a rumor with decimals.</p>
+<hr />
+<h2 id="the-point-estimate">3. The point estimate</h2>
+<p><strong>The lie:</strong> “1.31× faster” — measured once, or averaged, with no uncertainty attached.</p>
+<p>Wall-clock inference times on shared, thermally constrained, cache-sensitive hardware are noisy. Run-to-run variance of 10–20% is routine; variance that flips your conclusion is common. A point estimate from noisy data is not a measurement of the system — it is a measurement of <em>that afternoon</em>.</p>
+<p>Here is a concrete example from our own published work. We compared two quantized variants of the same model under identical serving settings, six interleaved runs, on a decision rule requiring the lower bound of the 95% confidence interval to clear 1.20×. The measured ratio was 0.909× with a 95% CI of [0.629, 1.301]. Read that interval: it contains “the candidate is slower,” “the candidate is identical,” and “the candidate is comfortably faster.” <strong>No honest conclusion was available.</strong> The correct output of that experiment is not a number; it is “insufficient evidence.”</p>
+<p><strong>The tell:</strong> No confidence intervals. No run count. Averages reported to two decimal places.</p>
+<p><strong>The antidote:</strong> Pre-register a statistical decision rule, then obey it. Interleave the arms (run A, B, A, B…), never batch them, so drift hits both sides equally. Bootstrap the ratio, report the interval, and let the <em>lower bound</em> — not the point estimate — do the talking. And when the interval straddles 1.0, publish that. We did: our first public run failed its own decision rule, and the failure is in the repository next to everything else. A number you cannot distinguish from its own noise is not a speedup. It is a coin flip you have decided to call.</p>
+<hr />
+<h2 id="the-moving-goalpost">4. The moving goalpost</h2>
+<p><strong>The lie:</strong> The pass bar was decided after the data arrived.</p>
+<p>“We expected 1.2×… we got 1.08×… which is basically a pass, so we’re calling it a pass.” Variants: switching the primary metric after the fact (throughput was the target until latency looked better); redefining “representative workload” mid-analysis; promoting a secondary metric to primary because it crossed.</p>
+<p>This is the most damaging lie on the list because it is invisible in the final artifact. A reader sees a number and a conclusion. They cannot see that the conclusion was reverse-engineered from the number.</p>
+<p><strong>The tell:</strong> No pre-registered decision rule. Language like “we consider this a meaningful improvement.” Thresholds that appear for the first time in the results section.</p>
+<p><strong>The antidote:</strong> Commit to the decision rule in public, with a timestamp, before measurement: the hypothesis, the metric, the threshold, the handling of missing or corrupted data. Deviations are allowed — real runs always surprise you — but each one must be dated, written, and appended to the record <em>as a deviation</em>, and the original rule stays visible. In our run, the pass bar (≥ 1.20× on the lower confidence bound) was locked before a single request was served. The measured 0.909 did not clear it. That is the entire point of locking the rule: it cannot be bargained with after the fact, including by us.</p>
+<hr />
+<h2 id="the-asymmetric-setup">5. The asymmetric setup</h2>
+<p><strong>The lie:</strong> Both arms were “the same setup” — except for the seven things that weren’t.</p>
+<p>Candidate gets batch size 8; baseline gets batch size 1. Candidate’s server is warmed; baseline’s is cold. Different context lengths, different sampling parameters, different thread counts, different software versions. Sometimes the asymmetry is innocent — the default flags changed between the two tutorials the engineer followed. Sometimes it is the entire effect.</p>
+<p><strong>The tell:</strong> Serving configurations listed for one arm only. “Standard settings.” Different llama.cpp / vLLM / TensorRT-LLM versions across arms, with no justification.</p>
+<p><strong>The antidote:</strong> One configuration, applied to both arms, specified to the flag, in the pre-registration. Same context length, same parallel slots, same sampling parameters, same server binary and version — ideally verified from the execution log, not from memory. If the candidate <em>requires</em> different settings to show its advantage, that is a legitimate and interesting result — but then you say so explicitly and price the difference into the claim. “Faster, if you also change everything else” is a different claim from “faster.”</p>
+<hr />
+<h2 id="the-free-lunch-speedup">6. The free-lunch speedup</h2>
+<p><strong>The lie:</strong> Quality is assumed, not measured.</p>
+<p>Quantization, pruning, distillation, speculative shortcuts — most inference optimizations trade a little model quality for a lot of speed. Sometimes the trade is excellent. Sometimes the model loses 5 percentage points on exactly the tasks you care about while gaining 30% throughput. Benchmarks that report only the speed side are reporting half of a transaction.</p>
+<p>The trap is subtle: quality loss is workload-dependent, and a few-shot benchmark may not expose it, while your customers’ prompts will. The faster model that quietly answers “I don’t know” more often is not cheaper. It is worse.</p>
+<p><strong>The tell:</strong> No quality gate in the protocol. “Subjective testing showed no degradation” — from the team that built the thing.</p>
+<p><strong>The antidote:</strong> A pre-registered quality gate, evaluated on held-out tasks, with a quantitative threshold, run on <em>both</em> arms. In our protocol the gate is fixed before measurement: a defined question set, a scoring rule, a maximum allowed degradation, and the gate result published next to the speed result. Speed that fails the quality gate is not a speedup; it is a regression wearing one. Publishing the pair — “not faster, and quality held” or “faster, at a cost of X” — is the entire difference between marketing and engineering.</p>
+<hr />
+<h2 id="the-cache-and-cold-start-confound">7. The cache and cold-start confound</h2>
+<p><strong>The lie:</strong> The timing includes — or excludes — whatever makes the numbers prettier.</p>
+<p>Time-to-first-token (TTFT) and steady-state decode throughput are different quantities with different sensitivities. Prompt cache hits change prefill cost by an order of magnitude. Model load time, warm-up passes, allocator behavior, and page-cache state all contaminate short benchmarks. A report that quietly mixes “first request after startup” with “warm steady state,” or benchmarks long generations for one arm and short ones for the other, is measuring its own methodology.</p>
+<p><strong>The tell:</strong> No statement of what the timer covers. “End to end” without a definition of either end. Warm-up runs mentioned only in the footnote that excludes them from the average.</p>
+<p><strong>The antidote:</strong> Define the timer in the pre-registration: what is measured (per-request wall time? TTFT? tokens per second after warm-up?), what is excluded (startup, warm-up) and how those are handled symmetrically across arms. Discard the first pass explicitly, or include it explicitly — but decide before you see which choice flatters you. Our own metric was deliberately unglamorous: completion tokens per request wall, everything logged per request, every raw file published. Boring measurement is a feature.</p>
+<hr />
+<h2 id="the-hardware-flex">8. The hardware flex</h2>
+<p><strong>The lie:</strong> “Runs great on modest hardware” — modest by whose standards?</p>
+<p>An undisclosed GPU, an undisclosed cloud instance, a laptop from the future. Hardware claims without environment disclosure are unverifiable by construction, and cost claims without hardware and energy accounting are worse: “10× cheaper” usually means “10× cheaper on the one machine where we ran it, amortizing nothing.”</p>
+<p><strong>The tell:</strong> No environment section, or one that says “consumer GPU.” Price claims with no machine, no utilization assumption, no cost basis.</p>
+<p><strong>The antidote:</strong> Publish the environment like you publish the code: CPU/GPU model, memory, OS, server binary and version, driver stack. If the claim is about cost, publish the cost model — instance price, utilization assumption, tokens served per dollar under a stated load. A speedup on hardware the reader cannot identify is a speedup they cannot plan around, and a cost claim without a cost model is astrology.</p>
+<hr />
+<h2 id="the-survivors-report">9. The survivor’s report</h2>
+<p><strong>The lie:</strong> You are reading the one run that looked good.</p>
+<p>Ten runs happened. Runs 1, 2, 4, 6, and 9 are in the trash. The blog post describes run 7. Nothing in the artifact tells you this, because the artifact was written after the cull. Publication bias does not require malice — it only requires that ugly runs be easier to lose than pretty ones, which is true everywhere.</p>
+<p><strong>The tell:</strong> A beautiful result with no execution log. Run counts that do not add up. “Representative run shown.”</p>
+<p><strong>The antidote:</strong> Write the log <em>during</em> execution, not after: every run, every arm, every timestamp, every artifact hash, every server start — kept whether it flatters you or not. Interleaving helps here too, since it makes selective deletion structurally harder: A/B/A/B records are hard to carve into a winner without leaving a wound. Then publish the log with the report. Our first public run came with six interleaved runs’ worth of raw JSONL and summaries, and its conclusion — a failed decision rule — survived because the log could not be quietly fixed. The log is not supporting documentation. The log <em>is</em> the result.</p>
+<hr />
+<h2 id="what-this-adds-up-to">What this adds up to</h2>
+<p>None of the nine requires genius to catch. Every one of them is defeated by the same move: <strong>decide before you measure, and preserve everything while you do.</strong></p>
+<p>That is the entire content of our methodology, and it is why we published it:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lie</th>
+<th>Discipline that catches it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cherry-picked workload</td>
+<td>Workload frozen from a fixed seed before the candidate exists</td>
+</tr>
+<tr class="even">
+<td>Unverifiable artifact</td>
+<td>SHA-256 against publisher records at download time, before data collection</td>
+</tr>
+<tr class="odd">
+<td>Point estimate</td>
+<td>Interleaved runs, bootstrap CI, pre-registered statistical decision rule</td>
+</tr>
+<tr class="even">
+<td>Moving goalpost</td>
+<td>Decision rule committed publicly with a timestamp</td>
+</tr>
+<tr class="odd">
+<td>Asymmetric setup</td>
+<td>One serving configuration, specified to the flag, applied to both arms</td>
+</tr>
+<tr class="even">
+<td>Free-lunch speedup</td>
+<td>Quantitative quality gate on both arms, threshold locked in advance</td>
+</tr>
+<tr class="odd">
+<td>Cache / cold-start confound</td>
+<td>Timer defined in writing; warm-up handled symmetrically</td>
+</tr>
+<tr class="even">
+<td>Hardware flex</td>
+<td>Full environment disclosure, cost model for cost claims</td>
+</tr>
+<tr class="odd">
+<td>Survivor’s report</td>
+<td>Timestamped execution log, written during, published always</td>
+</tr>
+</tbody>
+</table>
+<p>The uncomfortable corollary: this discipline will cost you victories. Our own first public run, executed honestly end to end, produced a number that failed our own bar, and we published it anyway — along with an artifact-integrity deviation that honest hash-checking caught before it could contaminate anything. That failure is not an embarrassment we tolerate. It is the product. Anyone can claim a speedup; the claim is cheap precisely because most benchmarks lie in at least one of these nine ways. What an engineering partner should sell you is not a number. It is the machinery that makes a number hard to fake.</p>
+<p>The machinery is open. The run is open. The failure is open.</p>
+<p>Everything we claim in public, you can re-run in private.</p>
+<hr />
+<p><em>License: CC BY 4.0. Reproduce freely with attribution.</em></p>
+<p><em>Related: <a href="https://github.com/effiq/protocol">effiq/protocol</a> · <a href="https://github.com/effiq/practice">effiq/practice</a> · <a href="https://effiq.tech">effiq.tech</a></em></p>
+</article>
+<nav class="pager"><div class="wrap"><a class="prev" href="guide-001-three-questions.html"><span class="lbl">← 04 · BUYER’S GUIDE 001</span><span class="t">Three Questions to Ask Before Buying Inference Optimization</span></a><a class="next" href="essay-004-three-days-after-the-fail.html"><span class="lbl">06 · ESSAY 004 →</span><span class="t"></span></a></div></nav>
+<footer class="colophon">
+<div class="wrap">
+<svg class="seal" width="40" height="40" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="fring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#fring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg>
+<span>© 2026 EFFIQ TECHNOLOGIES, INC.</span>
+<span>FROZEN BEFORE EXECUTION</span>
+<span class="spacer"></span>
+<a href="https://github.com/effiq">GITHUB</a>
+<a href="https://effiq.substack.com">SUBSTACK</a>
+<a href="https://effiq.tech">EFFIQ.TECH</a>
+</div>
+</footer>
+</body>
+</html>

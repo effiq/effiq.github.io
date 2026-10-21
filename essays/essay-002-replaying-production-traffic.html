@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>We replayed real production traffic at FP8: the 2.33× held — “no measurable quality loss” didn’t — Effiq</title>
+<meta name="description" content="We replayed real production traffic against FP8 and published the run — method, logs, and all.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-head">
+<div class="wrap">
+<a class="brand" href="../index.html"><svg class="seal" width="34" height="34" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="hring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#hring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg><span><span class="brand-name">EFFIQ</span><span class="brand-sub">AUDITABLE INFERENCE OPTIMIZATION</span></span></a>
+<nav class="site-nav">
+<a href="../index.html">Ledger</a>
+<a href="https://github.com/effiq">GitHub</a>
+<a href="https://effiq.substack.com">Newsletter</a>
+</nav>
+</div>
+</header>
+<header class="art-head">
+<div class="wrap">
+<div class="crumbs"><a href="../index.html">LEDGER</a> / 02 / ESSAY 002</div>
+<div class="art-meta"><span class="no">02</span><span>ESSAY 002</span><span>OCTOBER 6, 2026</span></div>
+<h1>We replayed real production traffic at FP8: the 2.33× held — “no measurable quality loss” didn’t</h1>
+<div class="evidence">PRODUCTION TRAFFIC REPLAYED · SEED-LOCKED · FULL LOGS PUBLIC</div>
+</div>
+</header>
+<article class="art-body">
+<p>The last essay ended with a written promise: outside Pilot 001’s small world — one L40S, one hash-pinned model, one declared synthetic workload — we guarantee nothing. The question readers asked most: <strong>what about real traffic?</strong></p>
+<p>This time we did the laborious thing. We took Microsoft’s public Azure LLM inference trace (two production services, real arrival timestamps), cut a week of windows out of it, froze the subsampling rule in a signed amendment, and replayed the identical arrival process at two arms on a single L40S: BF16 and FP8. Odd and even runs alternate which arm goes first; requests are paired one by one; the decision rules were frozen before a single measurement existed.</p>
+<p>The results first — one good, one bad, both verbatim from the sealed verdicts:</p>
+<ul>
+<li><strong>Performance: FP8 = 2.3279× throughput, paired-bootstrap 95% CI [1.6691, 4.1199] — PASS.</strong></li>
+<li><strong>Quality: blind-judged clarity-axis delta −0.127 against a pre-registered tolerance of −0.1. A breach of 0.027 — FAIL.</strong></li>
+</ul>
+<h2 id="the-2.33-doesnt-live-in-the-average-it-lives-at-the-knee">The 2.33× doesn’t live in the average — it lives at the knee</h2>
+<p>On the quieter hours the per-run speedups are unspectacular: paired log-ratios around +0.45 to +0.72, i.e. one-and-a-half to two×. The story is the heaviest hour: the real evening peak arrives, and BF16’s queue collapses on contact — pooled P95 time-to-first-token <strong>37.272 s</strong>, versus <strong>1.861 s</strong> on FP8; that run’s log-ratio is +2.238, nearly nine×.</p>
+<p>This is what synthetic workloads never measure: <strong>the value of quantization is not “faster on average” — it’s that the capacity knee sits at a different place.</strong> The same flood hits both arms; one arm’s tail latency sails to seven× the SLO reference line while the other doesn’t flinch. If you plan capacity to BF16’s knee, a peak means buying more GPUs. Plan to FP8’s knee, and you buy nothing. For a compute bill, the knee’s location is worth more than the average speed.</p>
+<p>Honest disclosure: the trace peaks at roughly 50× what a single L40S can serve, so the replay is thinned and compressed under a frozen rule (Amendment-01, signed with zero measurement data in existence); both arms face byte-identical arrivals. We measured relative ratios and the shape of the knee — not absolute production QPS.</p>
+<h2 id="how-the-fail-was-handled">How the FAIL was handled</h2>
+<p>The rule was frozen: the overall delta and every per-axis delta must all be ≥ −0.1. Clarity came in at −0.127, over the line by 0.027.</p>
+<p>Notice what’s not on our menu: “have the judge re-score it,” “move the bar to 0.15,” “try a different set of items.” <strong>The point of freezing the rule is that it doesn’t negotiate when it fires — including at us.</strong> The FAIL went into the record, the verdict document is public, and it was published no later than a PASS would have been.</p>
+<h2 id="then-we-went-and-doubted-our-own-judge">Then we went and doubted our own judge</h2>
+<p>Filing the FAIL didn’t end the questions. We chased it on two levels. First, post-hoc analysis (explicitly labeled: descriptive, verdict unchanged): the same judge model, scoring <strong>the same arm-A answer sheets</strong> two days apart, drifted by 0.67–0.91 points; and the per-item score damage across our two pilots correlates at −0.002 — <strong>if FP8 truly hurt particular items, the wounds should overlap. They don’t overlap at all.</strong></p>
+<p>Second, a formal follow-up: a separate pre-registration (frozen before execution) handed the sealed 150 answer pairs, presentation order untouched, to an independent judge panel. Result: <strong>every axis delta from both panel judges came out positive</strong> — clarity at <strong>+0.127</strong> and <strong>+0.193</strong> — same day, same model family, same answer sheets, sign-flipped against the original judge’s −0.127. Panel outcome: <strong>the original FAIL is judge-fragile, consistent with single-judge noise.</strong></p>
+<p>One number that made us blink: the two new judges graded both arms about 1.5 points lower overall. Judges don’t even share a scale — which is why our protocol only ever trusts within-match differentials, never absolute scores.</p>
+<p>The lesson now enters our engineering standard: <strong>a single-judge ±0.1 tolerance sits below the judge’s own noise floor. From the next pilot onward, the quality gate is a multi-judge panel by default.</strong></p>
+<h2 id="so-what-holds-exactly">So what holds, exactly</h2>
+<ul>
+<li><strong>Holds:</strong> under replayed production load, FP8’s throughput advantage is large and statistically sealed, and the knee advantage is hard evidence.</li>
+<li><strong>Not demonstrated:</strong> quality neutrality at this operating point — one axis over the line by 0.027, with the signal at the same magnitude as judge noise.</li>
+<li><strong>Not supported:</strong> any claim that “FP8 hurts quality” — the CI crosses zero, per-item damage shows no stable signature, and the panel flipped the sign.</li>
+<li><strong>Always true:</strong> change the model, the GPU, or the engine version, and all of the above is void until re-measured.</li>
+</ul>
+<p>This is what we sell — <strong>not a number, an envelope map</strong>: where it’s green, where it’s red, and the configuration that keeps you in the green, every line of it anchored to raw logs you can recompute.</p>
+<h2 id="dont-trust-us.-recompute-us.">Don’t trust us. Recompute us.</h2>
+<p>The whole evidence chain is public: the frozen protocol and its amendments, the raw logs of every run, the judge’s verbatim per-item responses, the follow-up’s pre-registration and amendment, three verdict documents. Three <code>--verify</code> commands — no network, no GPU — recompute every number from the raw logs by hand: the FAIL, and the ROBUST-CLEAR that overturned its judge.</p>
+<p>Optimization is the product; measurement is the moat. An envelope map is worth more than a poster.</p>
+<hr />
+<p><em>Evidence chain: protocol &amp; scripts — github.com/effiq/pilot002 ｜ all raw logs — github.com/effiq/pilot-logs ｜ verdict: VERDICT.md (incl. the addendum outcome) ｜ reproduction: REPRODUCE.md ｜ previous essay: Your quantization speedup doesn’t transfer to your workload</em></p>
+<p><em>中文版本：《把真实流量回放给 FP8：2.33× 活下来了，“质量无损”这次没能证明》</em></p>
+</article>
+<nav class="pager"><div class="wrap"><a class="prev" href="essay-001-quantization-speedup.html"><span class="lbl">← 01 · ESSAY 001</span><span class="t">Your quantization speedup doesn’t transfer to your workload</span></a><a class="next" href="essay-003-we-published-our-fail.html"><span class="lbl">03 · ESSAY 003 →</span><span class="t"></span></a></div></nav>
+<footer class="colophon">
+<div class="wrap">
+<svg class="seal" width="40" height="40" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="fring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#fring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg>
+<span>© 2026 EFFIQ TECHNOLOGIES, INC.</span>
+<span>FROZEN BEFORE EXECUTION</span>
+<span class="spacer"></span>
+<a href="https://github.com/effiq">GITHUB</a>
+<a href="https://effiq.substack.com">SUBSTACK</a>
+<a href="https://effiq.tech">EFFIQ.TECH</a>
+</div>
+</footer>
+</body>
+</html>

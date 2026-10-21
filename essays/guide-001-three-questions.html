@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Questions to Ask Before Buying Inference Optimization — Effiq</title>
+<meta name="description" content="Three questions that separate an optimization vendor from a benchmarking rumor — ask them before you sign.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-head">
+<div class="wrap">
+<a class="brand" href="../index.html"><svg class="seal" width="34" height="34" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="hring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#hring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg><span><span class="brand-name">EFFIQ</span><span class="brand-sub">AUDITABLE INFERENCE OPTIMIZATION</span></span></a>
+<nav class="site-nav">
+<a href="../index.html">Ledger</a>
+<a href="https://github.com/effiq">GitHub</a>
+<a href="https://effiq.substack.com">Newsletter</a>
+</nav>
+</div>
+</header>
+<header class="art-head">
+<div class="wrap">
+<div class="crumbs"><a href="../index.html">LEDGER</a> / 04 / BUYER’S GUIDE 001</div>
+<div class="art-meta"><span class="no">04</span><span>BUYER’S GUIDE 001</span><span>OCTOBER 10, 2026</span></div>
+<h1>Three Questions to Ask Before Buying Inference Optimization</h1>
+<div class="evidence">EVIDENCE GRADE E4 · RECOMPUTABLE IN ONE COMMAND · FAILS PUBLIC · RAW LOGS OPEN</div>
+</div>
+</header>
+<article class="art-body">
+<p><strong>The inference-optimization market has an open secret: plenty of claims, very little evidence.</strong></p>
+<p>Quantization, speculative decoding, scheduling — every vendor promises 2×, 4×, 10×. Yet almost none of these numbers ship with confidence intervals, paired statistical tests, or raw logs. And nobody publishes the experiments that failed.</p>
+<p>The good news: you don’t need to be a performance engineer to tell real from fake. Three questions at procurement time will do.</p>
+<hr />
+<h2 id="question-1-whats-the-floor">Question 1: What’s the <em>floor</em>?</h2>
+<p><strong>Don’t ask “how fast at best” — ask “what is the lower bound of the 95% confidence interval?”</strong></p>
+<p>A “peak 4×” figure can be manufactured easily: pick the friendliest input length, turn off concurrency, run a hundred times and keep the best one. Under your production traffic it may collapse to 1.2×.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>A good answer sounds like</th>
+<th>Red flags</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Paired-bootstrap 95% CI [1.43, 2.01] — <strong>the floor is 1.43×</strong>, measured on samples of your load shape”</td>
+<td>“Up to 4×”, “typically 3×” — no interval, no test method, no load definition</td>
+</tr>
+<tr class="even">
+<td>States the input-length distribution, concurrency, and traffic model used</td>
+<td>A single bar chart with an unexplained X axis</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Our own published format is mandatory, e.g. from one experiment: two configurations of the same model at <strong>2.33× (peak, with a disclosed quality trade-off)</strong> and <strong>1.63× with a 95% CI floor of 1.43× (quality gate passed)</strong>. The first number is “how fast at best”; the second is “what you can count on.” When you buy optimization, you are buying the second.</p>
+</blockquote>
+<h2 id="question-2-can-i-recompute-it">Question 2: Can I recompute it?</h2>
+<p><strong>Don’t listen to explanations — ask for raw logs and one recompute command.</strong></p>
+<p>A serious optimization deliverable includes per-request raw timing logs, the pairing structure, random seeds, and a <code>--verify</code> entry point — so that you (or any third party you hire) can regenerate every number in the report from raw data with a single command on your own machine.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>A good answer sounds like</th>
+<th>Red flags</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Logs, seeds, and recompute scripts are in a public repo — verify any time”</td>
+<td>“The data is commercially sensitive”, “our internal platform doesn’t support export”</td>
+</tr>
+<tr class="even">
+<td>Recomputation doesn’t require the vendor in the room</td>
+<td>Verification requires logging into the vendor’s closed system</td>
+</tr>
+</tbody>
+</table>
+<p>A number that can only be reproduced on the publisher’s machines is not a measurement. It’s an advertisement.</p>
+<h2 id="question-3-have-you-ever-published-a-fail">Question 3: Have you ever published a FAIL?</h2>
+<p><strong>This is the most lethal of the three.</strong></p>
+<p>Every team doing real optimization has failed — optimization is a bet on complex systems, and nobody wins every bet. A vendor that has never published a failure is one of two things: it hasn’t run many real experiments, or it only shows you the wins.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>A good answer sounds like</th>
+<th>Red flags</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Yes — here’s the full record of the experiment where we missed our own bar, including raw judge data”</td>
+<td>“All our solutions are thoroughly validated” (= never fails = never tells the whole truth)</td>
+</tr>
+<tr class="even">
+<td>Failures published under the same criteria as successes</td>
+<td>Vague about failures, eloquent about successes</td>
+</tr>
+</tbody>
+</table>
+<p>A vendor willing to publish its FAILs has PASSes that actually mean something — because the same gate has ruled against it.</p>
+<hr />
+<h2 id="the-evidence-ladder-score-your-vendor">The Evidence Ladder: score your vendor</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grade</th>
+<th>Standard</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>E0</strong></td>
+<td>Pure claim</td>
+<td>“We’re N× faster”, no data at all</td>
+</tr>
+<tr class="even">
+<td><strong>E1</strong></td>
+<td>Numbers, no statistics</td>
+<td>Benchmark charts without CIs, pairing, or load definitions</td>
+</tr>
+<tr class="odd">
+<td><strong>E2</strong></td>
+<td>Statistics present</td>
+<td>CIs and test methods reported, but data not inspectable</td>
+</tr>
+<tr class="even">
+<td><strong>E3</strong></td>
+<td>Recomputable</td>
+<td>Raw logs, seeds, and scripts public; third parties can independently regenerate results</td>
+</tr>
+<tr class="odd">
+<td><strong>E4</strong></td>
+<td>Pre-registered + failures public</td>
+<td>Pass bars frozen and hash-sealed before execution; FAILs disclosed on equal footing with PASSes</td>
+</tr>
+</tbody>
+</table>
+<p>E0–E1 is marketing material; E2 is where measurement starts; E3 is where evidence starts; <strong>E4 is the only grade you can write into a capacity plan.</strong></p>
+<p>Next time a vendor pitches you inference optimization, send them this table and ask: which grade are your numbers?</p>
+<hr />
+<blockquote>
+<p>[!IMPORTANT] Every standard in this guide is one we apply to ourselves first: all experiment protocols are frozen and hash-published before execution, all raw logs and recompute scripts are open, and our published record includes one complete FAIL. Procurement standards shouldn’t come in two versions — one for vendors and one for ourselves.</p>
+</blockquote>
+<hr />
+<p><em>Effiq · Public experiment archives: github.com/effiq (full raw logs, pre-registered protocols, and recompute scripts)</em> <em>中文版本：<a href="https://github.com/effiq/essays/blob/main/guide-001-three-questions-zh.md">买推理优化之前，先问三个问题</a></em></p>
+</article>
+<nav class="pager"><div class="wrap"><a class="prev" href="essay-003-we-published-our-fail.html"><span class="lbl">← 03 · ESSAY 003</span><span class="t">After the 2.33×, we published our own FAIL</span></a><a class="next" href="nine-ways-inference-benchmarks-lie.html"><span class="lbl">05 · FIELD GUIDE →</span><span class="t"></span></a></div></nav>
+<footer class="colophon">
+<div class="wrap">
+<svg class="seal" width="40" height="40" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="fring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#fring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg>
+<span>© 2026 EFFIQ TECHNOLOGIES, INC.</span>
+<span>FROZEN BEFORE EXECUTION</span>
+<span class="spacer"></span>
+<a href="https://github.com/effiq">GITHUB</a>
+<a href="https://effiq.substack.com">SUBSTACK</a>
+<a href="https://effiq.tech">EFFIQ.TECH</a>
+</div>
+</footer>
+</body>
+</html>

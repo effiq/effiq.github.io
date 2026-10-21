@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three days after the FAIL, we published a PASS — Effiq</title>
+<meta name="description" content="Same protocol, same decision rule, three days later. This time the lower bound cleared the gate.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-head">
+<div class="wrap">
+<a class="brand" href="../index.html"><svg class="seal" width="34" height="34" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="hring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#hring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg><span><span class="brand-name">EFFIQ</span><span class="brand-sub">AUDITABLE INFERENCE OPTIMIZATION</span></span></a>
+<nav class="site-nav">
+<a href="../index.html">Ledger</a>
+<a href="https://github.com/effiq">GitHub</a>
+<a href="https://effiq.substack.com">Newsletter</a>
+</nav>
+</div>
+</header>
+<header class="art-head">
+<div class="wrap">
+<div class="crumbs"><a href="../index.html">LEDGER</a> / 06 / ESSAY 004</div>
+<div class="art-meta"><span class="no">06</span><span>ESSAY 004</span><span>OCTOBER 13, 2026</span><span class="verdict-pass" style="border:1.5px solid var(--ink);padding:.1rem .5rem;">VERDICT PASS</span></div>
+<h1>Three days after the FAIL, we published a PASS</h1>
+<div class="evidence">PROTOCOL FROZEN BEFORE EXECUTION · VERDICT <b>PASS</b> · SAME RULE AS THE FAIL</div>
+</div>
+</header>
+<article class="art-body">
+<p><strong>— the floor cleared the bar; only then did the peak earn its place on the page</strong></p>
+
+<p>Look at this set of numbers first.</p>
+<p>Throughput <strong>1.92×</strong>, paired-bootstrap 95% CI <strong>[1.627, 2.324]</strong> — bar 1.50, and this time the conservative lower bound cleared it on its own. Side by side, the stock-FP8 migration replication: <strong>1.96×</strong>, CI [1.654, 2.370], bar 1.20. Blind quality judging passed under all three judges; the worst seat’s overall delta is <strong>+0.013</strong> (tolerance −0.1) — and that seat belongs to the judge who issued the original red dot. Tail latency: P95 TPOT at <strong>0.30</strong> of baseline, first-token latency at <strong>0.31</strong>.</p>
+<p>You remember how the last essay ended: the performance gate missed by 0.067, the FAIL was published in full, and we left the words on the record — <em>one more FAIL, and the kill-page starts a full review.</em></p>
+<p>This is the other ending.</p>
+<h2 id="boundaries-first">Boundaries first</h2>
+<p>This PASS overturns nothing. Pilot 003’s FAIL on L40S is <strong>permanently valid</strong> — it hangs in the repository, one byte unchanged. Pilot 004 is a new claim, and its boundary is printed at the top of the verdict: <strong>a single NVIDIA H100 SXM 80GB, Qwen2.5-14B-Instruct (pinned revision), an Azure-trace-anchored workload, a calibrated operating point</strong> (concurrency 16, SLO compliance 0.9735). Outside this one cell, we claim nothing.</p>
+<p>The hardware moved a generation; not one rule loosened. The protocol was frozen before measurement (this time with four execution addenda, each archived before any further execution); both gates must pass to win; the statistics stayed sealed until all ten COMPLETE markers existed. On day 3 of the 30-day stop-loss window, the gavel came down.</p>
+<h2 id="what-the-recipe-did-right-this-time">What the recipe did right this time</h2>
+<p>Pilot 003’s FAIL wrote down the lesson: exempting attention layers repairs the red dot, but it eats compute — in the five quiet windows, the repaired build ran measurably slower than pure FP8. Pilot 004’s answer: <strong>exempt less, and exempt precisely.</strong></p>
+<p>The method: 192 attention projections × 256 calibration texts, per-module sensitivity profiling, exempt only the true outlier projections, FP8 everywhere else. Five candidate arms ran the screening, and one negative result is worth the record: the arm that deterministically merged the top two exemption sets scored <strong>negative</strong> (−0.017) — <strong>exemption sets do not compose naively.</strong> That null result is part of the lever map, on the record like everything else.</p>
+<p>The most direct comparison comes from the anchor arm: the previous generation’s heavier-exemption recipe, rebuilt as-is and run alongside (descriptive only, never entering any interval estimate). On the heaviest load slice, the old recipe delivers 2.26×; the new one, ≈<strong>3×</strong> — fewer exemptions, more speed, and it is the one that passed the panel.</p>
+<h2 id="a-margin-of-0.013">A margin of +0.013</h2>
+<p>The correct reading of the quality gate is “<strong>no measurable quality loss beyond tolerance</strong>,” not “better than BF16.” Under the strictest judge the margin is +0.013, and we are not calling that a rout. 450 blind judgments, judges blinded to arm identity, the worst-judge rule — all three are frozen text.</p>
+<p>This judge’s trajectory deserves a line of its own. In Pilot 002 it issued the clarity red dot at −0.127. In 003 the repaired build reversed to +0.033 under its hand. This time, the recipe with the fewest exemptions and the highest speed passed under it at +0.013. The instrument got neither stricter nor looser — what changed is the recipe.</p>
+<h2 id="the-peak-and-the-floor-together">The peak and the floor, together</h2>
+<p>Last essay we said the floor is worth more than the peak. That stands: the only citable statistic on the verdict is the conservative one that weights the ten runs equally. But the load dependence is real, and hiding it is the same kind of dishonesty as inflating it — so here is the full table, computed directly from the published run-level numbers:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Load slice (light → heavy)</th>
+<th>Migration (stock FP8)</th>
+<th>Retry (our recipe)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lightest</td>
+<td>1.50×</td>
+<td>1.48×</td>
+</tr>
+<tr class="even">
+<td>Second</td>
+<td>1.56×</td>
+<td>1.55×</td>
+</tr>
+<tr class="odd">
+<td>Middle band</td>
+<td>1.66× – 1.95×</td>
+<td>1.61× – 1.92×</td>
+</tr>
+<tr class="even">
+<td>Heaviest</td>
+<td><strong>3.03×</strong></td>
+<td><strong>2.97×</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>≈3× is the descriptive peak, ≈1.5× the descriptive floor, 1.92× the citable figure</strong> — all three true; the difference is only the hat each one wears. For capacity planning, use the smallest. For how fast it goes under heavy load, the table is on the record.</p>
+<h2 id="what-we-can-sell-now">What we can sell now</h2>
+<p>Pilot 003’s FAIL left a two-configuration compromise: quality at the price of speed, or speed with a red dot attached. Within the H100 boundary, Pilot 004 cancels the compromise:</p>
+<ul>
+<li><strong>One recipe:</strong> 1.92× (CI lower bound 1.63×, over the 1.50 bar), quality certified by a three-judge blind panel, tail latency cut by roughly 70%.</li>
+<li>The control — stock FP8 — is nearly as fast (1.96×), but its quality is not gated: it gives you the speed; the risk stays with you.</li>
+</ul>
+<p>The boundary is still that one cell: Qwen2.5-14B × H100 SXM × controlled load. Other models, other cards re-enter the same pipeline for their own license — calibration, profiling, synthesis, screening, confirmation, verdict, fully automatic. You have already seen what every verdict looks like.</p>
+<h2 id="dont-trust-us-recompute-us">Don’t trust us — recompute us</h2>
+<p>The full evidence chain is public: the frozen protocol and its four addenda, the raw records of the five-arm screening, 450 raw judge responses, per-request data from all ten performance runs, the verdict and the reproduction guide. Every stage ships a <code>--verify</code> entry — no network, no GPU — every number recomputed by your own hands from the raw logs, including the last FAIL and including this PASS.</p>
+<p>The FAIL stays where it is; the red zones are not erased. The green of the new cell is drawn standing on the red of the old one.</p>
+<p><strong>Optimization is the product; measurement is the moat. The floor cleared the bar — and only then did the peak earn its place on the page.</strong></p>
+<hr />
+<p><em>Evidence chain: protocol, addenda &amp; scripts — github.com/effiq/pilot004 ｜ all raw logs — github.com/effiq/pilot-logs ｜ verdict: VERDICT.md ｜ reproduction: REPRODUCE.md ｜ previous essay: After the 2.33×, we published our own FAIL</em></p>
+<p><em>中文版本：《FAIL 挂出三天后，我们发布了 PASS》</em></p>
+</article>
+<nav class="pager"><div class="wrap"><a class="prev" href="nine-ways-inference-benchmarks-lie.html"><span class="lbl">← 05 · FIELD GUIDE</span><span class="t">Nine Ways Inference Benchmarks Lie</span></a><a class="next" href="https://effiq.substack.com"><span class="lbl">NEXT VERDICT →</span><span class="t">Subscribe on Substack</span></a></div></nav>
+<footer class="colophon">
+<div class="wrap">
+<svg class="seal" width="40" height="40" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="fring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#fring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg>
+<span>© 2026 EFFIQ TECHNOLOGIES, INC.</span>
+<span>FROZEN BEFORE EXECUTION</span>
+<span class="spacer"></span>
+<a href="https://github.com/effiq">GITHUB</a>
+<a href="https://effiq.substack.com">SUBSTACK</a>
+<a href="https://effiq.tech">EFFIQ.TECH</a>
+</div>
+</footer>
+</body>
+</html>

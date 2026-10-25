@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The machine said no — twice — Effiq</title>
+<meta name="description" content="Pilot 005 was the first pilot run end-to-end by the frozen pipeline. Its first batch of verdicts: one baseline pass, two negatives — produced and published by the machine itself.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-head">
+<div class="wrap">
+<a class="brand" href="../index.html"><svg class="seal" width="34" height="34" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="hring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#hring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg><span><span class="brand-name">EFFIQ</span><span class="brand-sub">AUDITABLE INFERENCE OPTIMIZATION</span></span></a>
+<nav class="site-nav">
+<a href="../index.html">Ledger</a>
+<a href="https://github.com/effiq">GitHub</a>
+<a href="https://effiq.substack.com">Newsletter</a>
+</nav>
+</div>
+</header>
+<header class="art-head">
+<div class="wrap">
+<div class="crumbs"><a href="../index.html">LEDGER</a> / 07 / ESSAY 005</div>
+<div class="art-meta"><span class="no">07</span><span>ESSAY 005</span><span>OCTOBER 24, 2026</span><span style="border:1.5px solid var(--ink);padding:.1rem .5rem;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;">VERDICT 1 PASS · 2 FAIL</span></div>
+<h1>The machine said no — twice</h1>
+<div class="evidence">PROTOCOL FROZEN BEFORE EXECUTION · PIPELINE-ISSUED VERDICTS · 1 BASELINE PASS + 2 NEGATIVES</div>
+</div>
+</header>
+<article class="art-body">
+<p><strong>— the pipeline's first batch of verdicts includes two it was built to be unable to hide</strong></p>
+
+<p>Pilot 003's FAIL was a decision made by hand: a run missed its own line, and a human chose to publish the miss. Pilot 005 is different in kind. It is the first pilot executed end-to-end by the frozen pipeline — calibration, profiling, synthesis, screening, confirmation, verdict, fully automatic — across three pre-registered cells, with verdict-bearing status assigned to cells 2 and 3 <em>before ignition</em>. When the registry closed on October 23, it read: <strong>one baseline PASS, two FAILs.</strong> Nobody in the loop had a mechanism to make it read otherwise. That is the whole story, and it is a good one.</p>
+
+<h2>The shakedown cell — a PASS with its caveats printed on its face</h2>
+<p>Cell-1 (spec: a 32B general-purpose model × H100, public since protocol lock) cleared both frozen gates: migration CI lower bound <strong>1.5537</strong> against the 1.20 bar; recipe CI lower bound <strong>1.5395</strong> against the 1.50 bar. The margin on the recipe gate is 0.04, and we are not calling that a rout.</p>
+<svg viewBox="0 0 640 190" width="100%" role="img" aria-label="Recipe-gate CI lower bounds vs the frozen 1.50 bar" style="border:1.5px solid #3C403C;background:#F0FFF0;margin:1.2rem 0 .4rem;">
+<line x1="150" y1="150" x2="610" y2="150" stroke="#3C403C" stroke-width="1.2"/>
+<g font-family="'IBM Plex Mono',monospace" font-size="11" fill="#3C403C">
+<text x="150" y="166" text-anchor="middle">1.0×</text><text x="260" y="166" text-anchor="middle">1.2×</text><text x="370" y="166" text-anchor="middle">1.4×</text><text x="480" y="166" text-anchor="middle">1.6×</text><text x="590" y="166" text-anchor="middle">1.8×</text>
+</g>
+<g stroke="#3C403C" stroke-width="1"><line x1="150" y1="146" x2="150" y2="150"/><line x1="260" y1="146" x2="260" y2="150"/><line x1="370" y1="146" x2="370" y2="150"/><line x1="480" y1="146" x2="480" y2="150"/><line x1="590" y1="146" x2="590" y2="150"/></g>
+<line x1="425" y1="18" x2="425" y2="150" stroke="#3C403C" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="425" y="12" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#3C403C">FROZEN BAR 1.50×</text>
+<text x="20" y="58" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#3C403C">CELL-1</text>
+<rect x="150" y="40" width="297" height="24" fill="#3C403C"/>
+<text x="455" y="57" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#3C403C">1.5395 · PASS</text>
+<text x="20" y="118" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#3C403C">CELL-2</text>
+<rect x="150" y="100" width="161" height="24" fill="#D8E6D8" stroke="#3C403C" stroke-width="1.4"/>
+<text x="319" y="117" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#3C403C">1.2918 · FAIL</text>
+</svg>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;margin-top:.2rem;">FIG.1 — Recipe-gate CI lower bounds vs the frozen 1.50× bar. Paired bootstrap, n=10 runs, 100,000 resamples, seed 20262002. Source: stage-19 verdict records, github.com/effiq/pilot005.</p>
+<p>But cell-1 is the shakedown cell: under the frozen protocol its result carries <strong>no verdict weight</strong>, and its publication page says so at the top. It ran before the judge-calibration instrument existed, so every quality figure on that page comes from a single uncalibrated local seat — a load-bearing caveat, printed where the numbers are. Its numbers must not be compared on the same scale as cells 2 and 3. It also ran the pre-fix arm-selection flow and thereby exposed a defect in it, which is now registered and repaired. Exposing that defect is what a shakedown cell is <em>for</em>. A PASS that publishes its own caveats is worth more than one that doesn't.</p>
+
+<h2>The judge that has now sat in four pilots</h2>
+<p>Cell-2 (spec: a 14B reasoning-family distill × H100) reached the dual gates and failed both. Speed: recipe CI lower bound <strong>1.2918</strong> against the 1.50 bar — the chart above. Quality: three calibrated judges, blinded, 150 items. Two seats passed. The third scored the correctness axis <strong>−0.1067</strong> against a tolerance of −0.10 — short by seven thousandths. The worst-judge rule binds, and the gate fails.</p>
+<p>That seat's identity is the part we would not have scripted. It is the same judge that issued Pilot 002's red dot (−0.127), passed the repaired build in Pilot 003 (+0.033), and passed the minimal-exemption recipe in Pilot 004 (+0.013). It has now sat in four pilots and voted both ways:</p>
+<svg viewBox="0 0 640 210" width="100%" role="img" aria-label="One judge across four pilots vs the frozen tolerance" style="border:1.5px solid #3C403C;background:#F0FFF0;margin:1.2rem 0 .4rem;">
+<line x1="60" y1="80" x2="610" y2="80" stroke="#3C403C" stroke-width="0.8" stroke-dasharray="2 3"/>
+<text x="606" y="74" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#3C403C">0 (parity)</text>
+<line x1="60" y1="130" x2="610" y2="130" stroke="#3C403C" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="606" y="146" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#3C403C">FROZEN TOLERANCE −0.10</text>
+<line x1="110" y1="143" x2="240" y2="63" stroke="#3C403C" stroke-width="1.2"/>
+<line x1="240" y1="63" x2="370" y2="73" stroke="#3C403C" stroke-width="1.2"/>
+<line x1="370" y1="73" x2="500" y2="133" stroke="#3C403C" stroke-width="1.2"/>
+<circle cx="110" cy="143" r="7" fill="#3C403C"/>
+<circle cx="240" cy="63" r="7" fill="#D8E6D8" stroke="#3C403C" stroke-width="1.6"/>
+<circle cx="370" cy="73" r="7" fill="#D8E6D8" stroke="#3C403C" stroke-width="1.6"/>
+<circle cx="500" cy="133" r="7" fill="#3C403C"/>
+<g font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#3C403C">
+<text x="110" y="170" text-anchor="middle">PILOT 002</text><text x="110" y="183" text-anchor="middle">−0.127 · clarity</text>
+<text x="240" y="40" text-anchor="middle">PILOT 003</text><text x="240" y="53" text-anchor="middle">+0.033 · clarity</text>
+<text x="370" y="50" text-anchor="middle">PILOT 004</text><text x="370" y="63" text-anchor="middle">+0.013 · overall</text>
+<text x="500" y="170" text-anchor="middle">PILOT 005 · CELL-2</text><text x="500" y="183" text-anchor="middle">−0.1067 · correctness</text>
+</g>
+</svg>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;margin-top:.2rem;">FIG.2 — The same judge seat across four pilots, margin vs the frozen −0.10 tolerance (axis noted per point). The instrument got neither stricter nor looser; what changed is what sat under it. Sources: pilot002–pilot005 verdict records.</p>
+<p>And why no second attempt: the confirmation phase exists to certify a <em>success</em> claim. Under the frozen no-rerun rule, re-measuring after a FAIL is lose-lose — a repeated FAIL buys zero information, and a flipped PASS would be unpublishable by definition. One clean negative is publication-grade. The cell was sealed as its terminal state, with the reasoning frozen in an addendum.</p>
+
+<h2>The cell that never reached the gates</h2>
+<p>Cell-3 (spec: an Arabic-native 27B model × H100) ended at a gate most benchmark write-ups don't know exists: <strong>screening</strong>. The frozen proceed rule says the screening winner's clarity delta must be ≥ −0.05 to earn formal measurement. The winner scored <strong>−0.200</strong>, and the pipeline terminated the cell before any stage-18/19 data existed. No latency numbers, no throughput claims — nothing to cherry-pick from, because the machine never produced it.</p>
+<p>The observation that matters is in the control arm: stock FP8 — no recipe, plain migration — scored <strong>−0.55</strong> on clarity. On this combination, plain FP8 migration itself carries a quality cost of the same order as any recipe arm:</p>
+<svg viewBox="0 0 640 180" width="100%" role="img" aria-label="Cell-3 screening clarity deltas including the stock FP8 control" style="border:1.5px solid #3C403C;background:#F0FFF0;margin:1.2rem 0 .4rem;">
+<line x1="150" y1="150" x2="590" y2="150" stroke="#3C403C" stroke-width="1.2"/>
+<g font-family="'IBM Plex Mono',monospace" font-size="11" fill="#3C403C">
+<text x="150" y="166" text-anchor="middle">0</text><text x="325" y="166" text-anchor="middle">−0.35</text><text x="500" y="166" text-anchor="middle">−0.70</text>
+</g>
+<g stroke="#3C403C" stroke-width="1"><line x1="150" y1="146" x2="150" y2="150"/><line x1="325" y1="146" x2="325" y2="150"/><line x1="500" y1="146" x2="500" y2="150"/></g>
+<line x1="175" y1="18" x2="175" y2="150" stroke="#3C403C" stroke-width="1.4" stroke-dasharray="5 4"/>
+<text x="175" y="12" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#3C403C">PROCEED BAR −0.05</text>
+<text x="14" y="58" font-family="'IBM Plex Mono',monospace" font-size="11.5" fill="#3C403C">BEST RECIPE</text>
+<rect x="150" y="40" width="100" height="24" fill="#3C403C"/>
+<text x="258" y="57" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#3C403C">−0.200</text>
+<text x="14" y="118" font-family="'IBM Plex Mono',monospace" font-size="11.5" fill="#3C403C">STOCK FP8</text>
+<rect x="150" y="100" width="275" height="24" fill="#D8E6D8" stroke="#3C403C" stroke-width="1.4"/>
+<text x="433" y="117" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#3C403C">−0.550</text>
+</svg>
+<p style="font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;margin-top:.2rem;">FIG.3 — Cell-3 screening clarity deltas (n=40 blinded items per arm, single indicative judge seat). Even the stock-FP8 control sits far below zero; the best recipe arm sits below the frozen proceed bar. Cell terminated by rule, not by judgment call. Source: cell-3 screening record.</p>
+<p>Context, honestly labeled: that quantization disproportionately harms non-Latin-script languages is established in the literature (Marchisio et al., <em>How Does Quantization Affect Multilingual LLMs?</em>, EMNLP Findings 2024). To our knowledge — literature search dated 2026-10-22 — no public measurement existed for FP8 dynamic quantization with FP8 KV cache on an Arabic-native 27B model under a pre-registered blind-judge protocol. Now one exists, and it is negative. That is a scoped first measurement in one specific setting, not a general priority claim. Also on the record: cell-3's first attempt was sealed <em>before producing any data</em> — the intervention counter hit 9 against a frozen cap of 8, and the run was terminated unmeasured, exactly as designed. The second attempt ran from ignition to verdict in 2 hours 43 minutes with zero adaptation edits.</p>
+
+<h2>What the two FAILs are — and what they are for you</h2>
+<p>The semantics, verbatim from the verdict records: under the pre-registered process, budget, and statistical discipline, the lossless-speedup test on these model × quantization × hardware combinations returned negative. A negative result is neither a defect verdict on the models nor a capability verdict on us — it is a <strong>compressibility fact</strong> about each combination under the frozen process. We are an optimization company, not a rating agency: these pages certify our own optimization work, and nothing else.</p>
+<p>And the buyer's translation: if you run Arabic-language workloads on saturated H100 capacity, "just turn on FP8" now has a published counterexample with a recomputation sheet attached. Before anyone touches your stack, ask them the three questions in entry 04 — including whether their screening stage is allowed to say no.</p>
+
+<h2>Don't trust us — recompute us</h2>
+<p>Public since protocol lock: the frozen protocol (v4.2 and its twenty registered addenda), the three cell specs, the per-cell verdict publications with their reproduction sheets, and the pilot-level closure — all at <a href="https://github.com/effiq/pilot005">github.com/effiq/pilot005</a>. Raw evidence is archived under sha256 custody and available on request for audit. The ledger grows by accretion: Pilot 003's FAIL stays where it is, Pilot 004's PASS stays where it is, and Pilot 005's two negatives go in next to them. Nothing is rewritten.</p>
+<p>The next pilot will be pre-registered before any measurement, and whatever it returns will be published under the same frozen rules. <strong>Optimization is the product; measurement is the moat. The machine said no twice — and published both.</strong></p>
+<hr />
+<p><em>Evidence chain: protocol, addenda, cell specs, verdicts &amp; reproductions — <a href="https://github.com/effiq/pilot005">github.com/effiq/pilot005</a> (see verdicts/PILOT005-TOTAL-VERDICT.md) ｜ previous essay: Three days after the FAIL, we published a PASS</em></p>
+</article>
+<nav class="pager"><div class="wrap"><a class="prev" href="essay-004-three-days-after-the-fail.html"><span class="lbl">← 06 · ESSAY 004</span><span class="t">Three days after the FAIL, we published a PASS</span></a><a class="next" href="https://effiq.substack.com"><span class="lbl">NEXT VERDICT →</span><span class="t">Subscribe on Substack</span></a></div></nav>
+<footer class="colophon">
+<div class="wrap">
+<svg class="seal" width="40" height="40" viewBox="0 0 100 100" role="img" aria-label="Effiq seal" xmlns="http://www.w3.org/2000/svg">
+<defs><path id="fring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+<g fill="none" stroke="#3C403C">
+<circle cx="50" cy="50" r="48" stroke-width="1.5"/>
+<line x1="50.00" y1="10.00" x2="50.00" y2="4.00" stroke-width="1.4"/>
+<line x1="55.55" y1="7.86" x2="56.00" y2="4.39" stroke-width="0.7"/>
+<line x1="61.00" y1="8.95" x2="61.91" y2="5.57" stroke-width="0.7"/>
+<line x1="66.26" y1="10.74" x2="67.60" y2="7.50" stroke-width="0.7"/>
+<line x1="71.25" y1="13.19" x2="73.00" y2="10.16" stroke-width="0.7"/>
+<line x1="75.87" y1="16.28" x2="78.00" y2="13.51" stroke-width="0.7"/>
+<line x1="80.05" y1="19.95" x2="82.53" y2="17.47" stroke-width="0.7"/>
+<line x1="83.72" y1="24.13" x2="86.49" y2="22.00" stroke-width="0.7"/>
+<line x1="86.81" y1="28.75" x2="89.84" y2="27.00" stroke-width="0.7"/>
+<line x1="89.26" y1="33.74" x2="92.50" y2="32.40" stroke-width="0.7"/>
+<line x1="91.05" y1="39.00" x2="94.43" y2="38.09" stroke-width="0.7"/>
+<line x1="92.14" y1="44.45" x2="95.61" y2="44.00" stroke-width="0.7"/>
+<line x1="90.00" y1="50.00" x2="96.00" y2="50.00" stroke-width="1.4"/>
+<line x1="92.14" y1="55.55" x2="95.61" y2="56.00" stroke-width="0.7"/>
+<line x1="91.05" y1="61.00" x2="94.43" y2="61.91" stroke-width="0.7"/>
+<line x1="89.26" y1="66.26" x2="92.50" y2="67.60" stroke-width="0.7"/>
+<line x1="86.81" y1="71.25" x2="89.84" y2="73.00" stroke-width="0.7"/>
+<line x1="83.72" y1="75.87" x2="86.49" y2="78.00" stroke-width="0.7"/>
+<line x1="80.05" y1="80.05" x2="82.53" y2="82.53" stroke-width="0.7"/>
+<line x1="75.87" y1="83.72" x2="78.00" y2="86.49" stroke-width="0.7"/>
+<line x1="71.25" y1="86.81" x2="73.00" y2="89.84" stroke-width="0.7"/>
+<line x1="66.26" y1="89.26" x2="67.60" y2="92.50" stroke-width="0.7"/>
+<line x1="61.00" y1="91.05" x2="61.91" y2="94.43" stroke-width="0.7"/>
+<line x1="55.55" y1="92.14" x2="56.00" y2="95.61" stroke-width="0.7"/>
+<line x1="50.00" y1="90.00" x2="50.00" y2="96.00" stroke-width="1.4"/>
+<line x1="44.45" y1="92.14" x2="44.00" y2="95.61" stroke-width="0.7"/>
+<line x1="39.00" y1="91.05" x2="38.09" y2="94.43" stroke-width="0.7"/>
+<line x1="33.74" y1="89.26" x2="32.40" y2="92.50" stroke-width="0.7"/>
+<line x1="28.75" y1="86.81" x2="27.00" y2="89.84" stroke-width="0.7"/>
+<line x1="24.13" y1="83.72" x2="22.00" y2="86.49" stroke-width="0.7"/>
+<line x1="19.95" y1="80.05" x2="17.47" y2="82.53" stroke-width="0.7"/>
+<line x1="16.28" y1="75.87" x2="13.51" y2="78.00" stroke-width="0.7"/>
+<line x1="13.19" y1="71.25" x2="10.16" y2="73.00" stroke-width="0.7"/>
+<line x1="10.74" y1="66.26" x2="7.50" y2="67.60" stroke-width="0.7"/>
+<line x1="8.95" y1="61.00" x2="5.57" y2="61.91" stroke-width="0.7"/>
+<line x1="7.86" y1="55.55" x2="4.39" y2="56.00" stroke-width="0.7"/>
+<line x1="10.00" y1="50.00" x2="4.00" y2="50.00" stroke-width="1.4"/>
+<line x1="7.86" y1="44.45" x2="4.39" y2="44.00" stroke-width="0.7"/>
+<line x1="8.95" y1="39.00" x2="5.57" y2="38.09" stroke-width="0.7"/>
+<line x1="10.74" y1="33.74" x2="7.50" y2="32.40" stroke-width="0.7"/>
+<line x1="13.19" y1="28.75" x2="10.16" y2="27.00" stroke-width="0.7"/>
+<line x1="16.28" y1="24.13" x2="13.51" y2="22.00" stroke-width="0.7"/>
+<line x1="19.95" y1="19.95" x2="17.47" y2="17.47" stroke-width="0.7"/>
+<line x1="24.13" y1="16.28" x2="22.00" y2="13.51" stroke-width="0.7"/>
+<line x1="28.75" y1="13.19" x2="27.00" y2="10.16" stroke-width="0.7"/>
+<line x1="33.74" y1="10.74" x2="32.40" y2="7.50" stroke-width="0.7"/>
+<line x1="39.00" y1="8.95" x2="38.09" y2="5.57" stroke-width="0.7"/>
+<line x1="44.45" y1="7.86" x2="44.00" y2="4.39" stroke-width="0.7"/>
+<circle cx="50" cy="50" r="33" stroke-width="1"/>
+<circle cx="50" cy="50" r="31" stroke-width="0.6"/>
+</g>
+<text font-family="'IBM Plex Mono',monospace" font-size="5.4" letter-spacing="1.55" fill="#3C403C">
+<textPath href="#fring" startOffset="1.5%">FROZEN BEFORE EXECUTION · RECOMPUTABLE VERDICTS · EFFIQ ·</textPath>
+</text>
+<text x="50" y="53.5" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="14.5" letter-spacing="1.5" fill="#3C403C">EFFIQ</text>
+<text x="50" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="4.6" letter-spacing="2.2" fill="#3C403C">EST. 2026</text>
+</svg>
+<span>© 2026 EFFIQ TECHNOLOGIES, INC.</span>
+<span>FROZEN BEFORE EXECUTION</span>
+<span class="spacer"></span>
+<a href="https://github.com/effiq">GITHUB</a>
+<a href="https://effiq.substack.com">SUBSTACK</a>
+<a href="https://effiq.tech">EFFIQ.TECH</a>
+</div>
+</footer>
+</body>
+</html>
